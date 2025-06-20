@@ -1,5 +1,5 @@
 import { features } from '@/config/features';
-import { RecordForm } from '@/features/records/RecordForm';
+import { RecordForm } from '@/features/records';
 
 export default function NewRecordPage({ params }: { params: { id: string } }) {
   if (!features.records) return null;

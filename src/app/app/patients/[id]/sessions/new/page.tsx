@@ -1,5 +1,5 @@
 import { features } from '@/config/features';
-import { SessionEditor } from '@/features/sessions/SessionEditor';
+import { SessionEditor } from '@/features/sessions';
 
 export default function NewSessionPage({ params }: { params: { id: string } }) {
   if (!features.sessions) return null;

@@ -1,5 +1,5 @@
 import { features } from '@/config/features';
-import { PatientSessions } from '@/features/sessions/PatientSessions';
+import { PatientSessions } from '@/features/sessions';
 
 export default function PatientSessionsPage({ params }: { params: { id: string } }) {
   if (!features.sessions) return null;

@@ -2,7 +2,7 @@
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect } from 'react';
-import { NotificationBell } from '@/features/notifications/NotificationBell';
+import { NotificationBell } from '@/features/notifications';
 
 export default function AppLayout({ children }: { children: ReactNode }) {
   const { user } = useAuth();
