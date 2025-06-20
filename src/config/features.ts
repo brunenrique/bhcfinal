@@ -1,6 +1,6 @@
 export const features = {
   dashboard: true,
-  aiAssistant: false,
+  aiAssistant: true,
   patients: true,
   sessions: true,
   records: true,

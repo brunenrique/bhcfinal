@@ -11,6 +11,7 @@ Plataforma web para gestão de clínicas de psicologia, com agenda integrada, pr
 - **Tailwind CSS**
 - **Firebase**: Firestore, Cloud Functions, Cloud Messaging, Storage e Hosting
 - **Genkit** + Google AI para funcionalidades de inteligência artificial
+- **Editor de Sessões com IA** para analisar notas, sugerir templates e salvar preferências
 - **Jest** e Testing Library para testes automatizados
 
 ## Configuração do Ambiente
