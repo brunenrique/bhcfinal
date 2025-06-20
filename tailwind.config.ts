@@ -19,8 +19,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        headline: ["ClashDisplay-Semibold", "sans-serif"],
-        body: ["Inter", "sans-serif"],
+        sans: ['var(--font-sans)', 'sans-serif'],
+        serif: ['var(--font-serif)', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
