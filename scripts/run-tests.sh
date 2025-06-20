@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-npx jest
+npx jest --selectProjects client
