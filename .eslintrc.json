@@ -13,9 +13,6 @@
     "es6": true
   },
   "settings": {
-    "local-rules": {
-      "rulesDirectories": "./eslint-rules"
-    },
     "react": {
       "version": "detect"
     }
@@ -25,9 +22,7 @@
     "react-hooks",
     "jsx-a11y",
     "@next/next",
-    "local-rules",
-    "@typescript-eslint",
-    "custom-rules"
+    "@typescript-eslint"
   ],
   "extends": [
     "eslint:recommended",
@@ -75,18 +70,7 @@
           "preferButton"
         ]
       }
-    ],
-    "local-rules/no-aschild-on-a": "error"
+    ]
   },
-  "overrides": [
-    {
-      "files": [
-        "*.tsx",
-        "*.jsx"
-      ],
-      "rules": {
-        "custom-rules/no-multiple-asChild": "error"
-      }
-    }
-  ]
+  "overrides": []
 }
