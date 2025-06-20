@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --primary: 214 96% 60%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 182 56% 45%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 210 20% 96%;
+  --muted-foreground: 215 14% 34%;
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+  --destructive: 0 85% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 15% 83%;
+  --input: 214 15% 83%;
+  --ring: 214 96% 60%;
+  --radius: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 20% 98%;
+  }
+}
