@@ -3,5 +3,6 @@ export const features = {
   aiAssistant: false,
   patients: true,
   sessions: true,
+  records: true,
   schedule: true,
 };

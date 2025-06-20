@@ -24,7 +24,9 @@ export function PatientList() {
     <ul className="space-y-2">
       {patients.map((p) => (
         <li key={p.id} className="p-2 border rounded">
-          {p.name}
+          <a href={`/app/patients/${p.id}/records`} className="text-blue-600">
+            {p.name}
+          </a>
         </li>
       ))}
     </ul>

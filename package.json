@@ -53,6 +53,7 @@
     "firebase-admin": "^13.4.0",
     "genkit": "^1.8.0",
     "googleapis": "^130.0.0",
+    "idb-keyval": "^6.2.2",
     "lucide-react": "^0.475.0",
     "nanoid": "^5.0.7",
     "next": "^15.3.4",
