@@ -1,11 +1,12 @@
-'use client';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/lib/firebase';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { Button } from '@/components/Button';
+"use client";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "@/components/Button";
+import { useState } from "react";
 
 const schema = z.object({
   email: z.string().email(),
@@ -22,11 +23,17 @@ export default function LoginPage() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const router = useRouter();
   const params = useSearchParams();
+  const [errorMsg, setErrorMsg] = useState("");
 
   const onSubmit = async (data: FormData) => {
-    await signInWithEmailAndPassword(auth, data.email, data.password);
-    document.cookie = 'loggedIn=true; path=/';
-    router.push(params.get('redirect') || '/app');
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      document.cookie = "loggedIn=true; path=/";
+      router.push(params.get("redirect") || "/app");
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Não foi possível conectar. Verifique sua conexão.");
+    }
   };
 
   return (
@@ -37,20 +44,29 @@ export default function LoginPage() {
           <input
             type="email"
             placeholder="Email"
-            {...register('email')}
+            {...register("email")}
             className="w-full p-2 border rounded"
           />
-          {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
         </div>
         <div>
           <input
             type="password"
             placeholder="Senha"
-            {...register('password')}
+            {...register("password")}
             className="w-full p-2 border rounded"
           />
-          {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-500 text-sm">{errors.password.message}</p>
+          )}
         </div>
+        {errorMsg && (
+          <p className="text-red-600 text-sm" role="alert">
+            {errorMsg}
+          </p>
+        )}
         <Button type="submit" className="w-full">
           Entrar
         </Button>
