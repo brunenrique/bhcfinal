@@ -36,7 +36,7 @@ Plataforma web para gestão de clínicas de psicologia, com agenda integrada, pr
     *   É altamente recomendado usar os emuladores do Firebase para desenvolvimento local.
     *   Se esta é a primeira vez, configure os emuladores: `firebase init emulators` (selecione Firestore, Storage, Functions).
     *   Inicie os emuladores: `firebase emulators:start --project=demo-project`
-    *   Verifique se os emuladores estão rodando nas portas corretas (Firestore: 8083, Storage: 9199, UI: 4003). O arquivo `firebase.json` está configurado para usar `host: "0.0.0.0"` para os emuladores.
+    *   Verifique se os emuladores estão rodando nas portas corretas (Auth: 9100, Firestore: 8084, Storage: 9200, UI: 4004). O arquivo `firebase.json` utiliza `host: "0.0.0.0"` para permitir acesso externo.
 5.  **Inicie o Servidor de Desenvolvimento Next.js (em outro terminal):**
     ```bash
     npm run dev
@@ -87,8 +87,8 @@ Para obter `FIREBASE_CLIENT_EMAIL` e `FIREBASE_PRIVATE_KEY`:
 ### Variáveis de Configuração do Emulador (Desenvolvimento)
 
 -   `NEXT_PUBLIC_FIREBASE_EMULATOR_HOST`: Define o host que o SDK do Firebase do lado do cliente usará para se conectar aos emuladores.
-    *   Para desenvolvimento local padrão, o valor `localhost` é geralmente recomendado. Se `localhost` não funcionar, `127.0.0.1` pode ser tentado. O valor padrão no `env.example` é `localhost`.
-    *   Se você estiver acessando seu ambiente de desenvolvimento (ex: Cloud Workstation) por um IP ou nome de host específico e os emuladores estiverem expostos nesse endereço, ajuste conforme necessário.
+    *   Para desenvolvimento local, use `localhost` ou `127.0.0.1`.
+    *   Em ambientes remotos (como Cloud Workstations), os emuladores devem rodar com `host: 0.0.0.0` e esta variável precisa apontar para o domínio exposto da porta (ex: `9100-seu-id.ws...`).
 
 ### Outras Variáveis
 
