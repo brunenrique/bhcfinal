@@ -96,6 +96,13 @@ Para obter `FIREBASE_CLIENT_EMAIL` e `FIREBASE_PRIVATE_KEY`:
 -   `NEXT_PUBLIC_FIREBASE_VAPID_KEY`: Chave VAPID para Firebase Cloud Messaging (Web Push). Encontrada no Console do Firebase -> Configurações do Projeto -> Cloud Messaging -> Web configuration -> Web Push certificates.
 -   `NEXT_PUBLIC_DISABLE_AUTH`: Quando definido como `true`, desativa o sistema de login e autenticação. As verificações de autenticação nas rotas são contornadas e o acesso é liberado. **Atualmente, o código está configurado para operar como se esta variável estivesse sempre `true`, ignorando a necessidade de login.**
 
+## Funcionalidades Complementares
+
+- **Modo Offline**: anotações criadas em prontuário são salvas no IndexedDB quando não há conexão e sincronizadas automaticamente quando o usuário volta a ficar online.
+- **Integração com Google Calendar** (opcional): página `/app/calendar` permite conectar a agenda via OAuth.
+- **Uploads de Recursos**: página `/app/resources` para compartilhar arquivos gerais e `/app/patients/[id]/files` para arquivos específicos de pacientes.
+- **Notificações Internas**: membros da equipe recebem avisos na interface, com contagem de não lidas e marcação como lidas.
+
 ## Importante sobre Segurança
 
 *   **NUNCA** comite seu arquivo `.env.local` ou qualquer arquivo contendo chaves privadas ou credenciais sensíveis para o seu repositório Git. O arquivo `.env.local` já deve estar no `.gitignore` padrão de projetos Next.js.

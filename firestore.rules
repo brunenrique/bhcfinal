@@ -37,6 +37,11 @@ service cloud.firestore {
     match /waitingList/{itemId} {
       allow read, write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'psychologist'];
     }
+    // Notifications
+    match /notifications/{notificationId} {
+      allow read: if request.auth != null && resource.data.to == request.auth.uid;
+      allow write: if request.auth != null && request.resource.data.to != null;
+    }
     // Default deny
     match /{document=**} {
       allow read, write: if false;
