@@ -1,5 +1,3 @@
-p
-
 # Thalamus
 
 Plataforma web para gestão de clínicas de psicologia, com agenda integrada, prontuários seguros e funcionalidades auxiliadas por IA. O projeto é baseado em **Next.js** e **Firebase**, utilizando **TypeScript** e **Tailwind CSS** no frontend e **Cloud Functions** no backend. Fluxos de IA são implementados com **Genkit** e Google AI.
@@ -121,9 +119,6 @@ Para obter `FIREBASE_CLIENT_EMAIL` e `FIREBASE_PRIVATE_KEY`:
     ```bash
     firebase deploy --only functions
     ```
-
-Consulte [docs/blueprint.md](docs/blueprint.md) para uma visão geral das funcionalidades planejadas.
-
 ## Solucao de Problemas
 
 Erros genéricos como **"An unexpected Turbopack error occurred"** costumam estar relacionados a configurações de ambiente ou dependências ausentes. Caso se depare com essa mensagem ao rodar `npm run dev`, verifique os pontos abaixo:
