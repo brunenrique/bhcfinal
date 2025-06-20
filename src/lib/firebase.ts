@@ -1,7 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, connectAuthEmulator } from 'firebase/auth';
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore';
-import { getStorage, connectStorageEmulator } from 'firebase/storage';
+import { initializeApp } from "firebase/app";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getStorage, connectStorageEmulator } from "firebase/storage";
 
 const config = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,7 +19,7 @@ export const storage = getStorage(app);
 
 if (process.env.NEXT_PUBLIC_FIREBASE_EMULATOR_HOST) {
   const host = process.env.NEXT_PUBLIC_FIREBASE_EMULATOR_HOST;
-  connectAuthEmulator(auth, `http://${host}:9100`);
-  connectFirestoreEmulator(db, host, 8084);
-  connectStorageEmulator(storage, host, 9200);
+  connectAuthEmulator(auth, `http://${host}:9102`);
+  connectFirestoreEmulator(db, host, 8085);
+  connectStorageEmulator(storage, host, 9201);
 }
