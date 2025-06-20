@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { features } from '@/config/features';
-import { RecordList } from '@/features/records/RecordList';
+import { RecordList } from '@/features/records';
 
 export default function PatientRecordsPage({ params }: { params: { id: string } }) {
   if (!features.records) return null;

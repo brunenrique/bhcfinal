@@ -1,5 +1,5 @@
 import { features } from '@/config/features';
-import { PatientList } from '@/features/patients/PatientList';
+import { PatientList } from '@/features/patients';
 
 export default function PatientsPage() {
   if (!features.patients) return null;

@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { SessionEditor } from '@/features/sessions/SessionEditor';
+import { SessionEditor } from '@/features/sessions';
 
 jest.mock('@genkit-ai/next/client', () => ({
   runFlow: jest.fn().mockResolvedValue({ template: 'tpl' }),
