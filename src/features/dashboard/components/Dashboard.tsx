@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from 'react';
 import { features } from '@/config/features';
 import { db } from '@/lib/firebase';
