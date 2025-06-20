@@ -1,0 +1,70 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Função para verificar se o usuário está autenticado
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Função para verificar papel usando Custom Claims (preferível para Storage)
+    // Certifique-se de definir esses claims ao autenticar o usuário (ex: via Cloud Function)
+    function hasRole(roleName) {
+      return isSignedIn() && request.auth.token.role == roleName;
+    }
+
+    function isAdmin() {
+      return hasRole('Admin');
+    }
+
+    function isPsychologist() {
+      return hasRole('Psychologist');
+    }
+
+    function isPsychologistOrAdmin() {
+      return isPsychologist() || isAdmin();
+    }
+
+    // Recursos da Clínica (ex: PDFs, guias)
+    // Caminho: /resources/{resourceId_ou_nomeUnicoComExtensao}
+    match /resources/{fileName} {
+      allow read: if isSignedIn(); // Todos os usuários logados podem baixar
+      
+      // Psicólogos ou Admins podem fazer upload, com validações
+      allow write: if isPsychologistOrAdmin()
+                    && request.resource.size < 10 * 1024 * 1024 // Limite de 10MB
+                    && request.resource.contentType.matches('application/pdf|image/jpeg|image/png|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    }
+
+    // Arquivos específicos de pacientes (ex: documentos compartilhados com paciente)
+    // Caminho: /patient_files/{patientId}/{fileName}
+    match /patient_files/{patientId}/{fileName} {
+      // Leitura: Psicólogo responsável pelo paciente (via custom claim ou Firestore read) ou Admin.
+      // Esta é uma simplificação. Uma regra real poderia envolver checar um documento no Firestore
+      // que linka o psicólogo ao paciente, ou um custom claim no token do psicólogo.
+      // Por simplicidade aqui, vamos permitir a psicólogos e admins.
+      // TODO: Implementar lógica granular de acesso (ex: request.auth.token.assignedPatients.includes(patientId))
+      allow read: if isPsychologistOrAdmin(); 
+                      // Idealmente: (isPsychologist() && isAssignedToPatient(patientId)) || isAdmin()
+                      // Onde isAssignedToPatient(patientId) seria uma função que verifica essa relação.
+      
+      // Escrita: Psicólogo responsável ou Admin.
+      allow write: if isPsychologistOrAdmin() // Idealmente: (isPsychologist() && isAssignedToPatient(patientId)) || isAdmin()
+                     && request.resource.size < 5 * 1024 * 1024 // Limite de 5MB
+                     && request.resource.contentType.matches('application/pdf|image/jpeg|image/png|text/plain'); // Tipos permitidos
+    }
+
+    // Avatares de Usuários
+    // Caminho: /user_avatars/{userId}/{fileName_avatar}
+    match /user_avatars/{userId}/{avatarFileName} {
+      // Qualquer um pode ler avatares (se forem públicos)
+      allow read; 
+      
+      // Apenas o usuário autenticado pode escrever em seu próprio caminho de avatar
+      allow write: if isSignedIn() && request.auth.uid == userId
+                    && request.resource.size < 2 * 1024 * 1024 // Limite de 2MB
+                    && request.resource.contentType.matches('image/jpeg|image/png');
+    }
+  }
+}

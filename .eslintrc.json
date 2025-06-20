@@ -1,0 +1,92 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "settings": {
+    "local-rules": {
+      "rulesDirectories": "./eslint-rules"
+    },
+    "react": {
+      "version": "detect"
+    }
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "@next/next",
+    "local-rules",
+    "@typescript-eslint",
+    "custom-rules"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:@next/next/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "react/no-unknown-property": [
+      "error"
+    ],
+    "@next/next/no-html-link-for-pages": "warn",
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "warn",
+          "error",
+          "info"
+        ]
+      }
+    ],
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+        "components": [
+          "Link"
+        ],
+        "specialLink": [
+          "hrefLeft",
+          "hrefRight"
+        ],
+        "aspects": [
+          "invalidHref",
+          "preferButton"
+        ]
+      }
+    ],
+    "local-rules/no-aschild-on-a": "error"
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.tsx",
+        "*.jsx"
+      ],
+      "rules": {
+        "custom-rules/no-multiple-asChild": "error"
+      }
+    }
+  ]
+}

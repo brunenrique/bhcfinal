@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection - ler dados do usuário autenticado
+    match /users/{userId} {
+      allow read, update: if request.auth.uid == userId;
+      allow create: if request.auth != null;
+    }
+    // Assessments collection - psicólogos e admins podem ler e escrever
+    match /assessments/{assessmentId} {
+      allow read, write: if request.auth != null && (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['admin', 'psychologist']);
+    }
+    // Groups collection - psicólogos podem ler, criar e atualizar seus grupos
+    match /groups/{groupId} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'psychologist';
+    }
+    // Sessions subcollection under users
+    match /users/{userId}/sessions/{sessionId} {
+      allow read, write: if request.auth.uid == userId;
+    }
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
