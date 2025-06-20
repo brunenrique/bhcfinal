@@ -1,10 +1,12 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { listAll, ref, getDownloadURL } from 'firebase/storage';
-import { storage } from '@/lib/firebase';
-import { FileUpload } from '@/components/FileUpload';
+"use client";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { listAll, ref, getDownloadURL } from "firebase/storage";
+import { storage } from "@/lib/firebase";
+import { FileUpload } from "@/components/FileUpload";
 
-export default function PatientFilesPage({ params }: { params: { id: string } }) {
+export default function PatientFilesPage() {
+  const params = useParams<{ id: string }>();
   const [files, setFiles] = useState<string[]>([]);
 
   useEffect(() => {
@@ -23,8 +25,13 @@ export default function PatientFilesPage({ params }: { params: { id: string } })
       <ul className="space-y-2">
         {files.map((u) => (
           <li key={u}>
-            <a href={u} className="underline" target="_blank" rel="noopener noreferrer">
-              {u.split('/').pop()}
+            <a
+              href={u}
+              className="underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {u.split("/").pop()}
             </a>
           </li>
         ))}
