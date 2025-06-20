@@ -1,6 +1,6 @@
 {
   "name": "thalamus",
-  "description": "Plataforma web para gest\u00e3o de cl\u00ednicas de psicologia, com agenda integrada, prontu\u00e1rios seguros e funcionalidades auxiliadas por IA.",
+  "description": "Plataforma web para gestão de clínicas de psicologia, com agenda integrada, prontuários seguros e funcionalidades auxiliadas por IA.",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,8 +15,8 @@
     "test": "scripts/run-tests.sh",
     "test:rules": "firebase emulators:exec --project=demo-project \"npx jest --selectProjects firestore\"",
     "jest": "jest",
-    "backup": "node scripts/backup.js"
-   
+    "backup": "node scripts/backup.js",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.8.0",
@@ -94,6 +94,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "firebase-tools": "^14.6.0",
     "genkit-cli": "^1.8.0",
+    "husky": "^9.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.0",
     "jest-environment-jsdom": "^30.0.0",
