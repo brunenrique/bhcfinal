@@ -4,7 +4,10 @@ module.exports = {
       displayName: 'client',
       testEnvironment: 'jsdom',
       transform: {
-        '^.+\\.(ts|tsx)$': 'babel-jest',
+        '^.+\\.(ts|tsx)$': [
+          'babel-jest',
+          { configFile: './babel-jest.config.js' },
+        ],
       },
       moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
       roots: ['<rootDir>/src', '<rootDir>/tests'],
